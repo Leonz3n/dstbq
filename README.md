@@ -1,2 +1,1 @@
-# dstbq
-Simple distributed task queue.
+# k8s-job-massage
