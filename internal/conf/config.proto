@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+import "google/protobuf/duration.proto";
+
+option go_package = "github.com/Leonz3n/k8s-job-massage/internal/conf";
+
+message Http {
+  string host = 1;
+  int32 port = 2;
+}
+
+message Redis {
+  string network = 1;
+  repeated string addresses = 2;
+  google.protobuf.Duration read_timeout = 3;
+  google.protobuf.Duration write_timeout = 4;
+}
+
+message Config {
+  Http http = 1;
+  Redis redis = 2;
+}
