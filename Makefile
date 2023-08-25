@@ -1,4 +1,5 @@
 VERSION=$(shell git describe --tags --always)
+ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
 .PHONY: init
 # init env
@@ -16,4 +17,12 @@ config:
 # build
 build:
 	mkdir -p bin/ && go build -ldflags "-X main.Version=$(VERSION)" -o ./bin/ ./...
+
+.PHONY: proto
+# proto
+proto:
+	protoc -I=$(ROOT_DIR)/proto \
+				 --go_out=$(ROOT_DIR)/proto \
+				 --go_opt=module=github.com/Leonz3n/kulery/proto \
+				 $(ROOT_DIR)/proto/kulery.proto $(ROOT_DIR)/proto/config.proto
 
